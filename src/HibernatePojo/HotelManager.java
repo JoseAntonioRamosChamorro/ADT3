@@ -1,12 +1,10 @@
 package HibernatePojo;
-import java.awt.List;
-import java.util.Iterator;
+import java.awt.*;
 import java.util.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import java.util.List;
 
+import org.hibernate.*;
+import org.hibernate.cfg.*;
 public class HotelManager {
 
 	
@@ -27,12 +25,12 @@ public class HotelManager {
 		 System.out.println("Perro " + c.getIdCliente() + " insertado		correctamente");
 		}
 	//read
-	@SuppressWarnings("rawtypes")
+
 	public static List read() {
 		 String c = "FROM clientes";
 		 Session sessionObj = getSessionFactory().openSession();
-		 List results = (List) sessionObj.createQuery(c).list();
-		 Iterator perrossiterator = ((java.util.List) results).iterator();
+		List results =  sessionObj.createQuery(c).list();
+		 Iterator perrossiterator = (results).iterator();
 		 while (perrossiterator.hasNext()) {
 			 Clientes c2 = (Clientes) perrossiterator.next();
 		 System.out.println(" - " + c2.getNombre() + " - " +
@@ -46,6 +44,7 @@ public class HotelManager {
 		 Session sessionObj = getSessionFactory().openSession();
 		 Transaction transObj = sessionObj.beginTransaction();
 		 Clientes c3 = (Clientes) sessionObj.load(Clientes.class, cliente.getIdCliente());
+		
 		 /* Modificamos todos los atributos */
 		 c3.setNombre(cliente.getNombre());
 		 c3.setApellidos(cliente.getApellidos());
