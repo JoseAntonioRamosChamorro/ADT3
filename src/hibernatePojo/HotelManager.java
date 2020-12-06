@@ -1,17 +1,16 @@
 package hibernatePojo;
 import java.util.List;
-
-import org.hibernate.*;
-import org.hibernate.cfg.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 public class HotelManager {
 
 
 	private static SessionFactory getSessionFactory() {
-
-		SessionFactory sessionFactory = new Configuration()
+		SessionFactory sessionFactory = new Configuration().addAnnotatedClass(Clientes.class)
 				.addAnnotatedClass(Clientes.class).configure().buildSessionFactory();
 		return sessionFactory;
-
 	}
 	//crear
 	public static void create(Clientes c) {
@@ -23,14 +22,13 @@ public class HotelManager {
 		System.out.println("Cliente " + c.getIdCliente() + " insertado		correctamente");
 	}
 	//read
-
 	public static List read() {
 		Session sessionObj = getSessionFactory().openSession();
-		String c = "FROM Clientes";
-		List results =  sessionObj.createQuery(c).list();
+		String query = "FROM Clientes";
+		List resultado = sessionObj.createQuery(query).list();
 		sessionObj.close();
-		return results;
-	} 
+		return resultado;
+	}
 	// update
 	public static void update(Clientes cliente) {
 		Session sessionObj = getSessionFactory().openSession();
@@ -60,15 +58,11 @@ public class HotelManager {
 
 	public static void main(String[] args) {
 
-		Clientes p1 = new Clientes("JoséAnt", "Ramos", "joseantonioramoschamorro@gmail.com", "12345678A",
-				"12345678A");
-		
-	
-		create(p1); 
+		Clientes client1 = new Clientes("JoséAnt", "Ramos", "joseantonioramoschamorro@gmail.com", "12345678A","12345678A");
+		create(client1); 
 		read();
-		update(p1);	 
-		delete(p1);
-
+		update(client1);	 
+		delete(client1);		
 	}
 
 }
