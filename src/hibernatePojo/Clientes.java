@@ -1,4 +1,4 @@
-package HibernatePojo;
+package hibernatePojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,19 +15,23 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "hotel", schema = "Clientes")
-
-public class Clientes implements java.io.Serializable {
+public class Clientes implements java.io.Serializable {	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "idCliente")
-	
-	private static final long serialVersionUID = 1L;
 	private Integer idCliente;
+	@Column(name = "nombre")
 	private String nombre;
+	@Column(name = "apellidos")
 	private String apellidos;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "dni")
 	private String dni;
+	@Column(name = "clave")
 	private String clave;
+	
 
 	public Clientes() {
 	}
